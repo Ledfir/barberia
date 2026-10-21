@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 3.1%;
+    --foreground: 40 25% 94%;
+    --card: 0 0% 6.7%;
+    --card-foreground: 40 25% 94%;
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 40 25% 94%;
+    --primary: 40 25% 94%;
+    --primary-foreground: 0 0% 3.1%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 40 25% 94%;
+    --muted: 0 0% 11%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 38 43% 59%;
+    --accent-foreground: 0 0% 3.1%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 40 25% 94%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 38 43% 59%;
+    --radius: 0.25rem;
+    --font-heading: "Cormorant Garamond", ui-serif, Georgia, serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-color: #080808;
+  }
+
+  ::selection {
+    background-color: #C6A667;
+    color: #080808;
+  }
+}
+
+@layer components {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .text-champagne {
+    color: #C6A667;
+  }
+  .bg-champagne {
+    background-color: #C6A667;
+  }
+  .border-champagne {
+    border-color: #C6A667;
+  }
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.3em] text-champagne font-body font-medium;
+  }
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C6A667, transparent);
+  }
+}
+
+/* Scrollbar minimalista */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+::-webkit-scrollbar-thumb {
+  background: #1C1C1C;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A667;
+}
+
+/* Cursor personalizado (escritorio) */
+@media (pointer: fine) {
+  .custom-cursor {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #C6A667;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
+    mix-blend-mode: difference;
+  }
+  .custom-cursor.hovering {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(198, 166, 103, 0.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
