@@ -84,17 +84,6 @@ export default function Login() {
       icon={LogIn}
       title="Bienvenido de nuevo"
       subtitle="Inicia sesión en tu cuenta"
-      footer={
-        <>
-          ¿No tienes cuenta?{" "}
-          <Link
-            to="/register"
-            className="text-primary font-medium hover:underline"
-          >
-            Crear una
-          </Link>
-        </>
-      }
     >
       {error && (
         <div className="mb-4 p-3 rounded-lg bg-destructive/10 text-destructive text-sm">

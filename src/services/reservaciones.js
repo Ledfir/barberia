@@ -14,10 +14,29 @@ export async function createReservacion(payload) {
   }
   submitting = true;
   try {
-    if (IS_DEMO) {
+    // Usar el endpoint específico de reservaciones, incluso en modo demo
+    const reservacionesUrl = import.meta.env.VITE_RESERVACIONES_URL;
+    
+    if (reservacionesUrl) {
+      // Enviar al endpoint real
+      const response = await fetch(`${reservacionesUrl}/reservaciones`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || `Error HTTP ${response.status}`);
+      }
+
+      return await response.json();
+    } else {
+      // Fallback a modo demo si no hay URL de reservaciones
       await delay(1200);
-      // Modo demo: NO se confirma contra un servidor real.
-      // Devolvemos un identificador de demostración claramente marcado.
       return {
         demo: true,
         confirmada: false,
@@ -26,7 +45,6 @@ export async function createReservacion(payload) {
         reservacion: payload,
       };
     }
-    return await api.post("/reservaciones", payload);
   } finally {
     submitting = false;
   }
